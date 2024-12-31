@@ -11,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { Subreddit, Thread } from "@/types/reddit"
 import Link from 'next/link'
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 
 export default function SearchPage() {
   const [keywords, setKeywords] = useState('')
@@ -41,7 +43,7 @@ export default function SearchPage() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/search/', {
+      const response = await fetch(`${backendUrl}/search/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
