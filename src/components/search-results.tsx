@@ -15,10 +15,10 @@ export function SearchResults({ results, onViewPosts, viewMode }: SearchResultsP
       // Handle the specific date format "DD-MM-YYYY HH:MM:SS"
       const [datePart, timePart] = dateString.split(' ');
       if (!datePart) return 'Invalid Date';
-      
+
       const [day, month, year] = datePart.split('-');
       if (!day || !month || !year) return 'Invalid Date';
-      
+
       const date = new Date(`${year}-${month}-${day}${timePart ? ' ' + timePart : ''}`);
       return date.toLocaleDateString(undefined, {
         year: 'numeric',
@@ -26,7 +26,7 @@ export function SearchResults({ results, onViewPosts, viewMode }: SearchResultsP
         day: 'numeric'
       });
     } catch (error) {
-      return 'Invalid Date';
+      return `Invalid Date ${error}`;
     }
   };
 

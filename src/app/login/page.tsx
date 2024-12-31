@@ -33,7 +33,7 @@ export default function LoginPage() {
         setError('Invalid credentials');
       }
     } catch (err) {
-      setError('Failed to login. Please try again.');
+      setError(`Failed to login. Please try again. ${err}`);
     }
   };
 
@@ -48,7 +48,7 @@ export default function LoginPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Username</Label>
-              <Input 
+              <Input
                 id="username"
                 type="text"
                 placeholder="Enter your username"
@@ -59,7 +59,7 @@ export default function LoginPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input 
+              <Input
                 id="password"
                 type="password"
                 placeholder="Enter your password"

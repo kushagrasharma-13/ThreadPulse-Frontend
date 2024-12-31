@@ -58,12 +58,12 @@ export default function SearchPage() {
       const data = (await response.json())
       if (data.success) {
         const { communities, threads } = data.data
-        const communityResults = communities.map((community: any) => ({
+        const communityResults = communities.map((community: Subreddit) => ({
           id: community.name,
           name: community.name,
           description: community.description,
           subscribers: community.subscribers,
-          created: community.creation_date,
+          created: community.created,
           url: community.url,
           icon_img: community.icon_img,
           advertiser_category: community.advertiser_category,
@@ -72,15 +72,15 @@ export default function SearchPage() {
           banner_background_image: community.banner_background_image
         }))
 
-        const threadResults = threads.map((thread: any) => ({
-          id: thread["url"],
+        const threadResults = threads.map((thread: Thread) => ({
+          id: thread.postUrl,
           title: thread.title,
           author: thread.author,
           subreddit: thread.subreddit,
           upvotes: thread.upvotes,
           comments: thread.comments,
           flair: thread.flair,
-          postUrl: thread["url"],
+          postUrl: thread.postUrl,
         }))
 
         setSearchResults({
@@ -100,8 +100,8 @@ export default function SearchPage() {
 
   if (selectedSubreddit) {
     return (
-      <SubredditView 
-        subreddit={selectedSubreddit} 
+      <SubredditView
+        subreddit={selectedSubreddit}
         onBack={() => setSelectedSubreddit(null)}
       />
     )
@@ -153,8 +153,8 @@ export default function SearchPage() {
                 />
               </div>
             </div>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-gray-800 text-white hover:bg-gray-900 transition duration-150 ease-in-out"
               disabled={isLoading}
             >
@@ -183,7 +183,7 @@ export default function SearchPage() {
               </TabsList>
             </Tabs>
           )}
-          <SearchResults 
+          <SearchResults
             results={subredditIds ? searchResults.threads : (viewMode === 'communities' ? searchResults.communities : searchResults.threads)}
             onViewPosts={(subreddit) => setSelectedSubreddit(subreddit)}
             viewMode={subredditIds ? 'threads' : viewMode}

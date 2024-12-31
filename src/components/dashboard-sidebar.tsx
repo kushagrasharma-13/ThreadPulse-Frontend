@@ -49,7 +49,7 @@ export function DashboardSidebar() {
       }
     };
     checkAuthStatus();
-    
+
     if (isLoggedIn) {
       const checkRedditConnection = async () => {
         const connected = await new Promise(resolve => setTimeout(() => resolve(Math.random() > 0.5), 1000));
@@ -64,12 +64,12 @@ export function DashboardSidebar() {
     router.push('/login');
   };
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  // const toggleSidebar = () => {
+  //   setIsCollapsed(!isCollapsed);
+  // };
 
   return (
-    <Sidebar 
+    <Sidebar
       className={cn(
         "border-r h-screen bg-background transition-all duration-300",
         isCollapsed ? "w-16" : "w-64"
@@ -89,8 +89,8 @@ export function DashboardSidebar() {
         <SidebarMenu>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.href}>
-              <Link 
-                href={item.href} 
+              <Link
+                href={item.href}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground",
                   pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground",
@@ -128,12 +128,12 @@ export function DashboardSidebar() {
                   </>
                 )}
               </Link>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className={cn(
                   "w-full justify-start gap-3",
                   isCollapsed && "justify-center px-0"
-                )} 
+                )}
                 onClick={handleLogout}
               >
                 <LogOut className="h-4 w-4" />
@@ -142,8 +142,8 @@ export function DashboardSidebar() {
             </>
           ) : (
             <Link href="/login">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className={cn(
                   "w-full justify-start gap-3",
                   isCollapsed && "justify-center px-0"

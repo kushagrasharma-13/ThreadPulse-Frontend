@@ -36,7 +36,7 @@ export function SubredditView({ subreddit, onBack }: SubredditViewProps) {
       });
       return `${formattedDate} ${formattedTime}`;
     } catch (error) {
-      return 'Invalid Date';
+      return `Invalid Date ${error}`;
     }
   };
 
@@ -53,12 +53,14 @@ export function SubredditView({ subreddit, onBack }: SubredditViewProps) {
 
       {subreddit.banner_background_image && subreddit.banner_background_image !== "N/A" && !bannerError && (
         <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-200">
-          <img
-            src={decodeURIComponent(subreddit.banner_background_image)}
-            alt={`${subreddit.name} banner`}
-            className="w-full h-full object-cover"
-            onError={() => setBannerError(true)}
-          />
+          <picture>
+            <img
+              src={decodeURIComponent(subreddit.banner_background_image)}
+              alt={`${subreddit.name} banner`}
+              className="w-full h-full object-cover"
+              onError={() => setBannerError(true)}
+            />
+          </picture>
         </div>
       )}
 
@@ -67,12 +69,14 @@ export function SubredditView({ subreddit, onBack }: SubredditViewProps) {
           <div className="flex gap-4 items-start">
             {subreddit.icon_img && subreddit.icon_img !== "N/A" && !iconError ? (
               <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
-                <img
-                  src={subreddit.icon_img}
-                  alt={`${subreddit.name} icon`}
-                  className="w-full h-full object-cover"
-                  onError={() => setIconError(true)}
-                />
+                <picture>
+                  <img
+                    src={subreddit.icon_img}
+                    alt={`${subreddit.name} icon`}
+                    className="w-full h-full object-cover"
+                    onError={() => setIconError(true)}
+                  />
+                </picture>
               </div>
             ) : (
               <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
@@ -86,7 +90,7 @@ export function SubredditView({ subreddit, onBack }: SubredditViewProps) {
                   <p className="text-gray-600 mt-2">{subreddit.description}</p>
                 </div>
                 <div className="flex gap-2">
-                  <Button 
+                  <Button
                     className="bg-gray-800 text-white hover:bg-gray-900 transition duration-150 ease-in-out"
                     onClick={() => window.open(subreddit.url, '_blank')}
                   >
@@ -119,9 +123,9 @@ export function SubredditView({ subreddit, onBack }: SubredditViewProps) {
                   )}
                   <div className="flex items-center gap-2 text-gray-600">
                     <Link2 className="h-4 w-4" />
-                    <a 
-                      href={subreddit.url} 
-                      target="_blank" 
+                    <a
+                      href={subreddit.url}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline"
                     >
@@ -165,7 +169,7 @@ export function SubredditView({ subreddit, onBack }: SubredditViewProps) {
             </div>
           </CardContent>
         </Card>
-)}
+      )}
     </div>
   )
 }

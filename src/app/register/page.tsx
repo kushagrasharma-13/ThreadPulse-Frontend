@@ -32,16 +32,16 @@ export default function RegisterPage() {
     }
 
     try {
-      const success = await register({ username, email, password, confirm_password:confirmPassword });
+      const success = await register({ username, email, password, confirm_password: confirmPassword });
       if (success) {
         router.push('/dashboard'); // Redirect to a welcome page or dashboard after registration
       } else {
         setError('Registration failed. Please check your details and try again.');
       }
     } catch (err) {
-      setError('Failed to register. Please try again.');
+      setError(`Failed to register. Please try again. ${err}`);
     }
-    
+
   };
 
   return (

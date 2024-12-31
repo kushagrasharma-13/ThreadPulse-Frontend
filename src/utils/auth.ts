@@ -75,12 +75,12 @@ export const logout = () => {
   document.cookie = 'isLoggedIn=false; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
 };
 
-export const fetchData = async (url: string, options = {}) => {
+export const fetchData = async <T>(url: string, options: RequestInit = {}): Promise<T> => {
   const token = localStorage.getItem('access_token');
   const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
-    ...(options as any).headers,
+    ...(options.headers || {}),
   };
 
   try {
@@ -93,7 +93,7 @@ export const fetchData = async (url: string, options = {}) => {
       if (refreshed) {
         // Retry the original request with the new token
         const newToken = localStorage.getItem('access_token');
-        return fetchData(url, {
+        return fetchData<T>(url, {
           ...options,
           headers: { ...headers, Authorization: `Bearer ${newToken}` },
         });
@@ -106,7 +106,7 @@ export const fetchData = async (url: string, options = {}) => {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<T>; // Explicitly cast response to the generic type
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;
