@@ -48,7 +48,7 @@ export default function SearchPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ "keywords": keywords, "subredditIds": subredditIds, "strictMode": strictMode }),
+        body: new TextEncoder().encode(JSON.stringify({ "keywords": keywords, "subredditIds": subredditIds, "strictMode": strictMode })),
       })
       if (!response.ok) {
         throw new Error('Failed to fetch search results')
