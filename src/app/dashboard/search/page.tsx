@@ -51,8 +51,9 @@ export default function SearchPage() {
         body: new TextEncoder().encode(JSON.stringify({ "keywords": keywords, "subredditIds": subredditIds, "strictMode": strictMode })),
       })
       if (!response.ok) {
-        throw new Error('Failed to fetch search results')
+        throw new Error(`Failed to fetch search results ${response}`)
       }
+      console.log(response);
 
       const data = (await response.json())
       if (data.success) {
