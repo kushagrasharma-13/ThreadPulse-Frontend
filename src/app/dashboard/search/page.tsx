@@ -47,15 +47,10 @@ export default function SearchPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json', // Ensure the backend knows the response format
         },
-        body: JSON.stringify({
-          "keywords": keywords,
-          "subredditIds": subredditIds,
-          "strictMode": strictMode
-        }),
-      });
-      console.log("Response" + response);
+        body: JSON.stringify({ "keywords": keywords, "subredditIds": subredditIds, "strictMode": strictMode }),
+        mode: 'no-cors',
+      })
       if (!response.ok) {
         throw new Error('Failed to fetch search results')
       }
