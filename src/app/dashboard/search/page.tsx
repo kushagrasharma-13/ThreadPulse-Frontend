@@ -53,7 +53,9 @@ export default function SearchPage() {
       if (!response.ok) {
         throw new Error(`Failed to fetch search results ${response}`)
       }
-      console.log(response);
+      console.log(response.body);
+      console.log(response.json);
+      console.log(response.body?.getReader());
 
       const data = (await response.json())
       if (data.success) {
