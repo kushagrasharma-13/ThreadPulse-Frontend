@@ -47,12 +47,29 @@ export default function SearchPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json', // Ensure the backend knows the response format
         },
-        body: JSON.stringify({ "keywords": keywords, "subredditIds": subredditIds, "strictMode": strictMode }),
-      })
+        mode: 'cors', // Explicitly enable CORS
+        body: JSON.stringify({ 
+          "keywords": keywords, 
+          "subredditIds": subredditIds, 
+          "strictMode": strictMode 
+        }),
+      });
+    
       if (!response.ok) {
-        throw new Error('Failed to fetch search results')
+        // Parse the response to understand the error
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.error || 'Failed to fetch search results');
       }
+    
+      const data = await response.json();
+      console.log('Search Results:', data);
+    } catch (error) {
+      console.error('Error during search request:', error.message);
+      setError('An error occurred while fetching results. Please try again.');
+    }
+    
 
       const data = (await response.json())
       if (data.success) {
