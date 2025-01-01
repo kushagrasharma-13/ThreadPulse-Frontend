@@ -1,5 +1,4 @@
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL; // Default to localhost if env is missing
-console.log('Backend URL:', backendUrl);
 
 // Lock mechanism to prevent multiple token refresh requests
 let isRefreshing = false;
