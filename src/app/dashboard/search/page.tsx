@@ -56,6 +56,7 @@ export default function SearchPage() {
           "strictMode": strictMode
         }),
       });
+      console.log("Response" + response);
       if (!response.ok) {
         throw new Error('Failed to fetch search results')
       }
