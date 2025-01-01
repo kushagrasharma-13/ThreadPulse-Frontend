@@ -54,10 +54,11 @@ export default function SearchPage() {
         throw new Error(`Failed to fetch search results ${response}`)
       }
       console.log(response.body);
-      console.log(response.json);
+      console.log(await response.json());
       console.log(response.body?.getReader());
 
       const data = (await response.json())
+      console.log(data)
       if (data.success) {
         const { communities, threads } = data.data
         const communityResults = communities.map((community: Subreddit) => ({
