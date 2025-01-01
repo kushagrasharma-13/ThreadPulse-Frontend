@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     return [
       {
         // Match all API routes
-        source: "/api/:path*",
+        source: "/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" }, // Replace "*" with specific domains if needed
