@@ -49,7 +49,6 @@ export default function SearchPage() {
           'Content-Type': 'application/json',
           'Accept': 'application/json', // Ensure the backend knows the response format
         },
-        mode: 'no-cors', // Explicitly enable CORS
         body: JSON.stringify({
           "keywords": keywords,
           "subredditIds": subredditIds,
