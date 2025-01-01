@@ -49,7 +49,6 @@ export default function SearchPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ "keywords": keywords, "subredditIds": subredditIds, "strictMode": strictMode }),
-        mode: 'no-cors',
       })
       if (!response.ok) {
         throw new Error('Failed to fetch search results')
